@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EducaMente - Registro</title>
+    <link rel="stylesheet" href="./CSS/styles2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <!-- Language switcher Start -->
+    <button class="whatsapp-button" id="toggle-lang">
+        <i class="fa-solid fa-globe" style="font-size:35px;color:rgb(255, 255, 255)"></i>
+    </button>
+    <!-- Language switcher Finish -->
+
+    <div class="container-login">
+        <a href="./login.html"><img src="./IMG/Logo_Educa_Mente.png" alt="EducaMente_logo_img" data-translate="logo-alt"></a>
+        <div class="subcontainer-login">
+            <form id="registration-form">
+                <h1 data-translate="registration-title">Un paso más cerca 📚</h1>
+                <div class="input-box">
+                    <input type="text" placeholder="Nombre(s)" id="register-name" required data-placeholder="name-placeholder">
+                </div>
+                <div class="input-box">
+                    <input type="text" placeholder="Apellido(s)" id="register-lastname" required data-placeholder="lastname-placeholder">
+                </div>
+                <div class="input-box">
+                    <input type="email" placeholder="Correo electrónico" id="register-mail" required data-translate="email-placeholder">
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="Contraseña" id="register-password" required data-placeholder="password-placeholder">
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="Confirmar contraseña" id="register-password-repeat" required data-placeholder="confirm-password-placeholder">
+                </div>
+                <div class="registrarse-link">
+                    <p data-translate="already-have-account">¿Ya tienes cuenta?</p>
+                    <a href="./login.html" data-translate="login-link">Iniciar sesión</a>
+                </div>
+                <button type="submit" id="register-button" class="login-btn" data-translate="register-btn">Registrarse</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const usernameInput = document.getElementById('register-mail');
+            const passwordInput = document.getElementById('register-password');
+            const passwordRepeatInput = document.getElementById('register-password-repeat');
+            const registrationForm = document.getElementById('registration-form');
+    
+            let users = JSON.parse(localStorage.getItem('users')) || {};
+    
+            registrationForm.addEventListener('submit', function(event) {
+                const username = usernameInput.value.trim();
+                const password = passwordInput.value.trim();
+                const passwordRepeat = passwordRepeatInput.value.trim();
+    
+                // Validar si el usuario ya existe
+                if (users[username]) {
+                    event.preventDefault();
+                    alert('El usuario ya existe.');
+                    return;
+                }
+    
+                // Validar las contraseñas
+                if (password !== passwordRepeat || password === "") {
+                    event.preventDefault();
+                    alert("¡Error! Las contraseñas no coinciden o los campos están vacíos.");
+                } else {
+                    users[username] = {
+                        username: username,
+                        password: password,
+                    };
+    
+                    localStorage.setItem('users', JSON.stringify(users));
+                    alert("¡Registrado con ÉXITO!");
+    
+                    window.location.href = './login.html';
+
+                    usernameInput.value = '';
+                    passwordInput.value = '';
+                    passwordRepeatInput.value = '';
+                }
+            });
+        });
+    </script>
+    
+    <script>
+        const translations = {
+            en: {
+                "logo-alt": "EducaMente logo image",
+                "registration-title": "One step closer 📚",
+                "name-placeholder": "First Name(s)",
+                "lastname-placeholder": "Last Name(s)",
+                "email-placeholder": "Email",
+                "password-placeholder": "Password",
+                "confirm-password-placeholder": "Confirm Password",
+                "already-have-account": "Already have an account?",
+                "login-link": "Log In",
+                "register-btn": "Register",
+            },
+            es: {
+                "logo-alt": "Imagen del logo de EducaMente",
+                "registration-title": "Un paso más cerca 📚",
+                "name-placeholder": "Nombre(s)",
+                "lastname-placeholder": "Apellido(s)",
+                "email-placeholder": "Correo electrónico",
+                "password-placeholder": "Contraseña",
+                "confirm-password-placeholder": "Confirmar contraseña",
+                "already-have-account": "¿Ya tienes cuenta?",
+                "login-link": "Iniciar sesión",
+                "register-btn": "Registrarse",
+            }
+        };
+
+        // Function to change the language
+        function changeLanguage(language) {
+                // Cambiar textos de los elementos con data-translate
+                document.querySelectorAll('[data-translate]').forEach((element) => {
+                    const key = element.getAttribute('data-translate');
+                    if (translations[language][key]) {
+                        element.textContent = translations[language][key];
+                    }
+                });
+
+                // Cambiar los placeholders de los inputs/textarea con data-placeholder
+                document.querySelectorAll('[data-placeholder]').forEach((input) => {
+                    const key = input.getAttribute('data-placeholder');
+                    if (translations[language][key]) {
+                        input.placeholder = translations[language][key];
+                    }
+                });
+            }
+
+            // Cargar el idioma desde localStorage o por defecto español
+            let currentLang = localStorage.getItem('language') || 'es';
+
+            // Set default language on page load
+            window.onload = () => {
+                changeLanguage(currentLang);  // Aplicar el idioma guardado al cargar la página
+            };
+
+            // Código para cambiar el idioma con un botón (si está presente en esa página)
+            const toggleLangButton = document.getElementById('toggle-lang');
+            if (toggleLangButton) {
+                toggleLangButton.addEventListener('click', () => {
+                    currentLang = currentLang === 'es' ? 'en' : 'es';
+                    changeLanguage(currentLang);
+                    localStorage.setItem('language', currentLang);  // Guardar el idioma seleccionado
+                });
+            }        
+    </script>
+
+</body>
+</html>

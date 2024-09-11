@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EducaMente - Biblioteca Virtual</title>
+    <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <!-- Lateral NavBar Start -->
+    <nav>
+        <ul>
+            <li>
+                <a href="#" class="logo">
+                    <img src="../IMG/Nav_Educa_logo.png" alt="">
+                    <span class="nav-item">Educamente</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="logout" id="logout-button">
+                    <i class="fa fa-sign-out"></i>
+                    <span class="nav-item">Salir del examen</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- Lateral NavBar Finish -->
+
+    <section class="description-section">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <h2>Examen de Sociales</h2>
+            </div>
+            <hr>
+            <div id="quiz">
+                <!-- Preguntas -->
+                <div class="question-container">
+                    <div class="question">1) ¿Cuál de los siguientes NO es considerado un poder del Estado en la mayoría de las democracias modernas?</div>
+                    <ul class="answers">
+                        <li><input type="radio" name="q1" value="A">A. Ejecutivo.</li>
+                        <li><input type="radio" name="q1" value="B">B. Legislativo.</li>
+                        <li><input type="radio" name="q1" value="C">C. Judicial.</li>
+                        <li><input type="radio" name="q1" value="D">D. Económico.</li>
+                    </ul>
+                </div>
+                <div class="question-container">
+                    <div class="question">2) ¿Qué término se refiere al proceso por el cual las personas y grupos de diferentes orígenes culturales se integran en una sociedad?</div>
+                    <ul class="answers">
+                        <li><input type="radio" name="q2" value="A">A. Globalización.</li>
+                        <li><input type="radio" name="q2" value="B">B. Asimilación.</li>
+                        <li><input type="radio" name="q2" value="C">C. Multiculturalismo.</li>
+                        <li><input type="radio" name="q2" value="D">D. Aculturación.</li>
+                    </ul>
+                </div>
+                <div class="question-container">
+                    <div class="question">3) ¿Cuál de los siguientes es un ejemplo de una organización no gubernamental (ONG) internacional?</div>
+                    <ul class="answers">
+                        <li><input type="radio" name="q3" value="A">A. La ONU.</li>
+                        <li><input type="radio" name="q3" value="B">B. La OTAN.</li>
+                        <li><input type="radio" name="q3" value="C">C. Amnistía Internacional.</li>
+                        <li><input type="radio" name="q3" value="D">D. El Banco Mundial.</li>
+                    </ul>
+                </div>
+                <div class="question-container">
+                    <div class="question">4) En el contexto de los derechos humanos, ¿qué significa el término "inalienable"?</div>
+                    <ul class="answers">
+                        <li><input type="radio" name="q4" value="A">A. Que los derechos pueden ser otorgados por el gobierno.</li>
+                        <li><input type="radio" name="q4" value="B">B. Que los derechos no pueden ser negados o quitados.</li>
+                        <li><input type="radio" name="q4" value="C">C. Que los derechos varían según la cultura.</li>
+                        <li><input type="radio" name="q4" value="D">D. Que los derechos están sujetos a cambios legislativos.</li>
+                    </ul>
+                </div>
+                <div class="question-container">
+                    <div class="question">5) ¿Cuál de los siguientes es un ejemplo de participación ciudadana en una democracia?</div>
+                    <ul class="answers">
+                        <li><input type="radio" name="q5" value="A">A. Pagar impuestos.</li>
+                        <li><input type="radio" name="q5" value="B">B. Obedecer las leyes.</li>
+                        <li><input type="radio" name="q5" value="C">C. Votar en elecciones.</li>
+                        <li><input type="radio" name="q5" value="D">D. Tener un empleo.</li>
+                    </ul>
+                </div>
+                <!-- Botón de envío -->
+                <div class="quiz-footer">
+                    <button id="submit-btn" onclick="submitQuiz()" class="exam-btn">Enviar</button>
+                    <div id="result" class="score"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const logout_button = document.getElementById("logout-button");
+    
+            logout_button.addEventListener('click', function(event) {
+
+                const userConfirmed = confirm("¿Estás seguro de querer salir? se perderan todos los cambios.");
+                
+                if (userConfirmed) {
+
+                    window.location.href = '../bibliotecavirtual.html';
+                } else {
+
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+    
+    <script>
+        const correctAnswers = {
+            q1: 'D',
+            q2: 'C',
+            q3: 'C',
+            q4: 'B',
+            q5: 'C'
+        };
+
+        function submitQuiz() {
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+
+            for (let q in correctAnswers) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                const questionContainer = selected.closest('.question-container');
+
+                if (selected) {
+                    if (selected.value === correctAnswers[q]) {
+                        score++;
+                        questionContainer.classList.add('correct');
+                    } else {
+                        questionContainer.classList.add('incorrect');
+                        const correctAnswer = questionContainer.querySelector(`input[value="${correctAnswers[q]}"]`);
+                        correctAnswer.closest('li').style.fontWeight = 'bold';
+                    }
+                }
+            }
+
+            const percentage = (score / totalQuestions) * 100;
+            const resultText = `Puntaje: ${percentage}/100 - ` + (percentage >= 50 ? '¡Aprobado!' : 'Desaprobado');
+            const resultTextColor = (percentage >= 50 ? document.getElementById('result').style.color = "green" : document.getElementById('result').style.color = "red");
+            document.getElementById('result').textContent = resultText;
+
+            const submitBtn = document.getElementById('submit-btn');
+            if (percentage >= 50) {
+                submitBtn.textContent = 'Salir';
+                submitBtn.onclick = () => {
+                    // Obtener el puntaje actual guardado en localStorage
+                    const savedPuntaje = localStorage.getItem('socialesPuntaje');
+                    const savedPercentage = savedPuntaje ? parseFloat(savedPuntaje.split('/')[0]) : 0;
+
+                    // Solo actualiza si el nuevo puntaje es mayor que el guardado
+                    if (percentage > savedPercentage) {
+                        localStorage.setItem('socialesEstado', 'Completado');
+                        localStorage.setItem('socialesPuntaje', `${percentage}/100`);
+                    }
+                    
+                    window.location.href = '../bibliotecavirtual.html'; // Redirigir a la página de la biblioteca virtual
+                };
+            } else {
+                submitBtn.textContent = 'Repetir';
+                submitBtn.onclick = () => {
+                    location.reload();
+                };
+            }
+        }
+    </script>
+</body>
+</html>

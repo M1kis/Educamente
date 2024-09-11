@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EducaMente - Preguntas y respuestas</title>
+    <link rel="stylesheet" href="./CSS/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    
+    <!-- Language switcher Start -->
+    <button class="whatsapp-button" id="toggle-lang">
+        <i class="fa-solid fa-globe" style="font-size:35px;color:rgb(255, 255, 255)"></i>
+    </button>
+    <!-- Language switcher Finish -->
+
+    <!-- Lateral NavBar Start -->
+    <nav>
+        <ul>
+            <li>
+                <a href="#" class="logo">
+                    <img src="./IMG/Nav_Educa_logo.png" alt="">
+                    <span class="nav-item" data-translate="brand-name">Educamente</span>
+                </a>
+            </li>
+            <li>
+                <a href="index.html">
+                <i class="fa fa-home" style="font-size: 18px"></i>
+                <span class="nav-item" data-translate="home">Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a href="./bibliotecavirtual.html">
+                    <i class="fa fa-book" style="font-size: 18px"></i>
+                    <span class="nav-item" data-translate="library">Biblioteca virtual</span>
+                </a>
+            </li>
+            <li>
+                <a href="./diario.html">
+                    <i class="fa fa-newspaper-o" style="font-size: 18px"></i>
+                    <span class="nav-item" data-translate="diary">Mi diario</span>
+                </a>
+            </li>
+            <li>
+                <a href="./contacto.html">
+                    <i class="fa fa-group" style="font-size: 18px"></i>
+                    <span class="nav-item" data-translate="contact">Contacto</span>
+                </a>
+            </li>
+            <li>
+                <a href="./Preguntas.html">
+                    <i class="fa fa-support" style="font-size: 18px"></i>
+                    <span class="nav-item" data-translate="faq">FAQ</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="logout" id="logout-button">
+                    <i class="fa fa-sign-out"></i>
+                    <span class="nav-item" data-translate="logout">Cerrar sesión</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- Lateral NavBar Finish -->
+
+    <main>
+		<h1 class="titulo">Preguntas Frecuentes</h1>
+		<div class="categorias" id="categorias">
+			<div class="categoria activa" data-categoria="metodos-pago">
+				<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M3.848 19h-.848c-.796 0-1.559-.316-2.121-.879-.563-.562-.879-1.325-.879-2.121v-3c0-7.175 5.377-13 12-13s12 5.825 12 13v3c0 .796-.316 1.559-.879 2.121-.562.563-1.325.879-2.121.879h-.848c-2.69 4.633-6.904 5-8.152 5-1.248 0-5.462-.367-8.152-5zm16.152-5.876c-.601.236-1.269-.18-1.269-.797 0-.304-.022-.61-.053-.915-1.761-.254-3.618-1.926-3.699-3.723-1.315 2.005-4.525 4.17-7.044 4.17 1.086-.699 1.839-2.773 1.903-3.508-.581 1.092-2.898 3.136-4.551 3.487l-.018.489c0 .619-.669 1.032-1.269.797v3.771c.287.256.632.464 1.041.594.225.072.412.224.521.424 2.206 4.046 5.426 4.087 6.438 4.087.929 0 3.719-.035 5.877-3.169-1.071.433-2.265.604-3.759.653-.37.6-1.18 1.016-2.118 1.016-1.288 0-2.333-.784-2.333-1.75s1.045-1.75 2.333-1.75c.933 0 1.738.411 2.112 1.005 1.9-.026 4.336-.334 5.888-2.645v-2.236zm-11-.624c.686 0 1.243.672 1.243 1.5s-.557 1.5-1.243 1.5-1.243-.672-1.243-1.5.557-1.5 1.243-1.5zm6 0c.686 0 1.243.672 1.243 1.5s-.557 1.5-1.243 1.5-1.243-.672-1.243-1.5.557-1.5 1.243-1.5zm5.478-1.5h1.357c-.856-5.118-4.937-9-9.835-9-4.898 0-8.979 3.882-9.835 9h1.357c.52-4.023 3.411-7.722 8.478-7.722s7.958 3.699 8.478 7.722z"/></svg>
+				<p data-translate="support-category">Soporte</p>
+			</div>
+			<div class="categoria" data-categoria="seguridad">
+				<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M12 0c-3.371 2.866-5.484 3-9 3v11.535c0 4.603 3.203 5.804 9 9.465 5.797-3.661 9-4.862 9-9.465v-11.535c-3.516 0-5.629-.134-9-3zm0 1.292c2.942 2.31 5.12 2.655 8 2.701v10.542c0 3.891-2.638 4.943-8 8.284-5.375-3.35-8-4.414-8-8.284v-10.542c2.88-.046 5.058-.391 8-2.701zm5 7.739l-5.992 6.623-3.672-3.931.701-.683 3.008 3.184 5.227-5.878.728.685z"/></svg>
+				<p data-translate="security-category">Seguridad</p>
+			</div>
+			<div class="categoria" data-categoria="cuenta">
+				<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M9.484 15.696l-.711-.696-2.552 2.607-1.539-1.452-.698.709 2.25 2.136 3.25-3.304zm0-5l-.711-.696-2.552 2.607-1.539-1.452-.698.709 2.25 2.136 3.25-3.304zm0-5l-.711-.696-2.552 2.607-1.539-1.452-.698.709 2.25 2.136 3.25-3.304zm10.516 11.304h-8v1h8v-1zm0-5h-8v1h8v-1zm0-5h-8v1h8v-1zm4-5h-24v20h24v-20zm-1 19h-22v-18h22v18z"/></svg>
+				<p data-translate="general-category">General</p>
+			</div>
+		</div>
+
+		<div class="preguntas">
+
+			<!-- Preguntas Soporte -->
+			<div class="contenedor-preguntas activo" data-categoria="metodos-pago">
+				<div class="contenedor-pregunta">
+					<p class="pregunta" data-translate="support-q1">¿Cómo puedo contactar al soporte técnico? <img src="./IMG/SVG/suma.svg" alt="Abrir Respuesta" /></p>
+					<p class="respuesta" data-translate="support-a1">Si necesitas ayuda o tienes algún problema, puedes ponerte en contacto con nuestro equipo de soporte técnico a través del correo electrónico <b>educamente@em.edu.co</b> o usando el formulario de contacto disponible en la sección de <b>“Contacto”</b> de la plataforma. Nuestro equipo está disponible para ayudarte de lunes a viernes, de 9:00 a.m. a 6:00 p.m. (hora local).</p>
+				</div>
+				<div class="contenedor-pregunta">
+					<p class="pregunta" data-translate="support-q2">¿Cómo puedo enviar comentarios o sugerencias sobre la plataforma? <img src="./IMG/SVG/suma.svg" alt="Abrir Respuesta" /></p>
+					<p class="respuesta" data-translate="support-a2">Valoramos mucho la opinión de nuestros usuarios y siempre estamos buscando maneras de mejorar. Si tienes comentarios, sugerencias o ideas sobre cómo podríamos hacer la plataforma aún mejor, puedes enviarlos a nuestro correo <b>educamente@em.edu.co</b>. Todas las opiniones son bienvenidas y nos ayudan a mejorar continuamente nuestros servicios.</p>
+				</div>
+			</div>
+
+			<!-- Preguntas Seguridad -->
+			<div class="contenedor-preguntas" data-categoria="seguridad">
+				<div class="contenedor-pregunta">
+					<p class="pregunta" data-translate="security-q1">¿Cómo protege la plataforma mi información personal? <img src="./IMG/SVG/suma.svg" alt="Abrir Respuesta" /></p>
+					<p class="respuesta" data-translate="security-a1">En Educamente, tomamos muy en serio la seguridad y privacidad de nuestros usuarios. Implementamos protocolos de seguridad avanzados, como el cifrado de datos y el acceso seguro, para garantizar que tu información personal esté protegida. Además, cumplimos con todas las normativas legales vigentes relacionadas con la protección de datos. No compartimos tu información con terceros sin tu consentimiento explícito.</p>
+				</div>
+				<div class="contenedor-pregunta">
+					<p class="pregunta" data-translate="security-q2">¿Qué debo hacer si creo que mi cuenta ha sido comprometida? <img src="./IMG/SVG/suma.svg" alt="Abrir Respuesta" /></p>
+					<p class="respuesta" data-translate="security-a2">Si sospechas que tu cuenta ha sido comprometida, te recomendamos que cambies tu contraseña de inmediato. Puedes hacerlo desde la sección de configuración de tu cuenta. Además, ponte en contacto con nuestro equipo de soporte técnico lo antes posible para que podamos investigar y tomar las medidas necesarias para proteger tu cuenta.</p>
+				</div>
+			</div>
+
+			<!-- Preguntas Cuenta -->
+			<div class="contenedor-preguntas" data-categoria="cuenta">
+				<div class="contenedor-pregunta">
+					<p class="pregunta" data-translate="general-q1">¿Qué es Educamente? <img src="./IMG/SVG/suma.svg" alt="Abrir Respuesta" /></p>
+					<p class="respuesta" data-translate="general-a1">Educamente es una innovadora plataforma educativa interactiva diseñada especialmente para jóvenes y adolescentes. Nuestro objetivo es hacer del aprendizaje una experiencia dinámica y atractiva, combinando contenido educativo de alta calidad con herramientas interactivas que fomentan la participación activa. Ya sea a través de cursos, talleres, o actividades en línea, estamos comprometidos en ayudar a los estudiantes a desarrollar sus habilidades y conocimientos de manera divertida y efectiva.</p>
+				</div>
+				<div class="contenedor-pregunta">
+					<p class="pregunta" data-translate="general-q2">¿Es gratis usar la plataforma? <img src="./IMG/SVG/suma.svg" alt="Abrir Respuesta" /></p>
+					<p class="respuesta" data-translate="general-a2">Educamente ofrece una combinación de contenidos gratuitos y de pago. Muchos de nuestros recursos y actividades están disponibles de forma gratuita para que cualquier estudiante pueda acceder y aprender. Sin embargo, también ofrecemos cursos y servicios premium que requieren una suscripción o pago único para acceder a contenido exclusivo y beneficios adicionales. Te invitamos a explorar nuestras opciones y elegir la que mejor se adapte a tus necesidades.</p>
+				</div>
+			</div>
+		</div>
+	</main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <h4 data-translate="footer-brand">Eduwise</h4>
+                <p data-translate="footer-desc">Tu plataforma educativa de confianza.</p>
+            </div>
+            <div class="footer-center">
+                <h4 data-translate="quick-links">Enlaces rápidos</h4>
+                <ul>
+                    <li><a href="./index.html" data-translate="home">Inicio</a></li>
+                    <li><a href="./bibliotecavirtual.html" data-translate="library">Biblioteca virtual</a></li>
+                    <li><a href="./diario.html" data-translate="diary">Mi diario</a></li>
+                    <li><a href="./contacto.html" data-translate="contact">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-right">
+                <h4 data-translate="follow-us">Síguenos</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 <span data-translate="footer-brand">Eduwise</span>. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const logout_button = document.getElementById("logout-button");
+
+            logout_button.addEventListener('click', function(event) {
+
+                const userConfirmed = confirm("¿Estás seguro de querer cerrar la sesión?");
+                
+                if (userConfirmed) {
+
+                    window.location.href = './login.html';
+                } else {
+
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+
+    <script>
+        const categorias = document.querySelectorAll('#categorias .categoria');
+        const contenedorPreguntas = document.querySelectorAll('.contenedor-preguntas');
+        let categoriaActiva = null;
+
+        categorias.forEach((categoria) => {
+            categoria.addEventListener('click', (e) => {
+                categorias.forEach((elemento) => {
+                    elemento.classList.remove('activa');
+                });
+
+                e.currentTarget.classList.toggle('activa');
+                categoriaActiva = categoria.dataset.categoria;
+
+
+                // Activamos el contenedor de preguntas que corresponde
+                contenedorPreguntas.forEach((contenedor) => {
+                    if(contenedor.dataset.categoria === categoriaActiva){
+                        contenedor.classList.add('activo');
+                    } else {
+                        contenedor.classList.remove('activo');
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        const preguntas = document.querySelectorAll('.preguntas .contenedor-pregunta');
+        preguntas.forEach((pregunta) => {
+            pregunta.addEventListener('click', (e) => {
+                e.currentTarget.classList.toggle('activa');
+
+                const respuesta = pregunta.querySelector('.respuesta');
+                const alturaRealRespuesta = respuesta.scrollHeight;
+                
+                if(!respuesta.style.maxHeight){
+                    // Si esta vacio el maxHeight entonces ponemos un valor.
+                    respuesta.style.maxHeight = alturaRealRespuesta + 'px';
+                } else {
+                    respuesta.style.maxHeight = null;
+                }
+
+                // [Opcional] Reiniciamos las demas preguntas
+                preguntas.forEach((elemento) => {
+                    // Solamente queremos ejecutar el codigo para las preguntas que no 
+                    // sean la pregunta a la que le dimos click.
+                    if(pregunta !== elemento){
+                        elemento.classList.remove('activa');
+                        elemento.querySelector('.respuesta').style.maxHeight = null;
+                    }
+                });
+
+
+            });
+        });
+    </script>
+
+    <script>
+        const translations = {
+            en: {
+                "brand-name": "Eduwise",
+                "home": "Home",
+                "library": "Virtual Library",
+                "diary": "My Diary",
+                "contact": "Contact",
+                "faq": "FAQ",
+                "logout": "Log out",
+                "faq-title": "Frequently Asked Questions",
+                "support-category": "Support",
+                "security-category": "Security",
+                "general-category": "General",
+                "support-q1": "How can I contact technical support?",
+                "support-a1": "If you need help or have any problems, you can contact our technical support team via email at <b>educamente@em.edu.co</b> or using the contact form available in the 'Contact' section of the platform. Our team is available to assist you Monday to Friday, from 9:00 AM to 6:00 PM (local time).",
+                "support-q2": "How can I send feedback or suggestions about the platform?",
+                "support-a2": "We greatly value the opinion of our users and are always looking for ways to improve. If you have comments, suggestions, or ideas on how we could make the platform even better, you can send them to our email <b>educamente@em.edu.co</b>. All feedback is welcome and helps us continuously improve our services.",
+                "security-q1": "How does the platform protect my personal information?",
+                "security-a1": "At Eduwise, we take the security and privacy of our users very seriously. We implement advanced security protocols such as data encryption and secure access to ensure that your personal information is protected. We also comply with all applicable legal regulations regarding data protection. We do not share your information with third parties without your explicit consent.",
+                "security-q2": "What should I do if I believe my account has been compromised?",
+                "security-a2": "If you suspect your account has been compromised, we recommend changing your password immediately. You can do this from the settings section of your account. Also, contact our technical support team as soon as possible so that we can investigate and take the necessary steps to protect your account.",
+                "general-q1": "What is Eduwise?",
+                "general-a1": "Eduwise is an innovative interactive educational platform specially designed for young people and teenagers. Our goal is to make learning a dynamic and engaging experience, combining high-quality educational content with interactive tools that encourage active participation.",
+                "general-q2": "Is the platform free to use?",
+                "general-a2": "Eduwise offers a combination of free and paid content. Many of our resources and activities are available for free so that any student can access and learn. However, we also offer premium courses and services that require a subscription or one-time payment to access exclusive content and additional benefits.",
+                "footer-brand": "Eduwise",
+                "footer-desc": "Your trusted educational platform.",
+                "quick-links": "Quick Links",
+                "follow-us": "Follow us"
+            },
+            es: {
+                "brand-name": "Educamente", 
+                "home": "Inicio",
+                "library": "Biblioteca virtual",
+                "diary": "Mi diario",
+                "contact": "Contacto",
+                "faq": "FAQ",
+                "logout": "Cerrar sesión",
+                "faq-title": "Preguntas Frecuentes",
+                "support-category": "Soporte",
+                "security-category": "Seguridad",
+                "general-category": "General",
+                "support-q1": "¿Cómo puedo contactar al soporte técnico?",
+                "support-a1": "Si necesitas ayuda o tienes algún problema, puedes ponerte en contacto con nuestro equipo de soporte técnico a través del correo electrónico <b>educamente@em.edu.co</b> o usando el formulario de contacto disponible en la sección de <b>“Contacto”</b> de la plataforma. Nuestro equipo está disponible para ayudarte de lunes a viernes, de 9:00 a.m. a 6:00 p.m. (hora local).",
+                "support-q2": "¿Cómo puedo enviar comentarios o sugerencias sobre la plataforma?",
+                "support-a2": "Valoramos mucho la opinión de nuestros usuarios y siempre estamos buscando maneras de mejorar. Si tienes comentarios, sugerencias o ideas sobre cómo podríamos hacer la plataforma aún mejor, puedes enviarlos a nuestro correo <b>educamente@em.edu.co</b>. Todas las opiniones son bienvenidas y nos ayudan a mejorar continuamente nuestros servicios.",
+                "security-q1": "¿Cómo protege la plataforma mi información personal?",
+                "security-a1": "En Educamente, tomamos muy en serio la seguridad y privacidad de nuestros usuarios. Implementamos protocolos de seguridad avanzados, como el cifrado de datos y el acceso seguro, para garantizar que tu información personal esté protegida. Además, cumplimos con todas las normativas legales vigentes relacionadas con la protección de datos. No compartimos tu información con terceros sin tu consentimiento explícito.",
+                "security-q2": "¿Qué debo hacer si creo que mi cuenta ha sido comprometida?",
+                "security-a2": "Si sospechas que tu cuenta ha sido comprometida, te recomendamos que cambies tu contraseña de inmediato. Puedes hacerlo desde la sección de configuración de tu cuenta. Además, ponte en contacto con nuestro equipo de soporte técnico lo antes posible para que podamos investigar y tomar las medidas necesarias para proteger tu cuenta.",
+                "general-q1": "¿Qué es Educamente?",
+                "general-a1": "Educamente es una innovadora plataforma educativa interactiva diseñada especialmente para jóvenes y adolescentes. Nuestro objetivo es hacer del aprendizaje una experiencia dinámica y atractiva, combinando contenido educativo de alta calidad con herramientas interactivas que fomentan la participación activa.",
+                "general-q2": "¿Es gratis usar la plataforma?",
+                "general-a2": "Educamente ofrece una combinación de contenidos gratuitos y de pago. Muchos de nuestros recursos y actividades están disponibles de forma gratuita para que cualquier estudiante pueda acceder y aprender. Sin embargo, también ofrecemos cursos y servicios premium que requieren una suscripción o pago único para acceder a contenido exclusivo y beneficios adicionales.",
+                "footer-brand": "Educamente",
+                "footer-desc": "Tu plataforma educativa de confianza.",
+                "quick-links": "Enlaces rápidos",
+                "follow-us": "Síguenos"
+            }
+        };
+
+
+
+         // Function to change the language
+         function changeLanguage(language) {
+            // Cambiar textos de los elementos con data-translate
+            document.querySelectorAll('[data-translate]').forEach((element) => {
+                const key = element.getAttribute('data-translate');
+                if (translations[language][key]) {
+                    element.textContent = translations[language][key];
+                }
+            });
+
+            // Cambiar los placeholders de los inputs/textarea con data-placeholder
+            document.querySelectorAll('[data-placeholder]').forEach((input) => {
+                const key = input.getAttribute('data-placeholder');
+                if (translations[language][key]) {
+                    input.placeholder = translations[language][key];
+                }
+            });
+        }
+
+        // Cargar el idioma desde localStorage o por defecto español
+        let currentLang = localStorage.getItem('language') || 'es';
+
+        // Set default language on page load
+        window.onload = () => {
+            changeLanguage(currentLang);  // Aplicar el idioma guardado al cargar la página
+        };
+
+        // Código para cambiar el idioma con un botón (si está presente en esa página)
+        const toggleLangButton = document.getElementById('toggle-lang');
+        if (toggleLangButton) {
+            toggleLangButton.addEventListener('click', () => {
+                currentLang = currentLang === 'es' ? 'en' : 'es';
+                changeLanguage(currentLang);
+                localStorage.setItem('language', currentLang);  // Guardar el idioma seleccionado
+            });
+        }        
+    </script>
+
+
+</body>
+</html>

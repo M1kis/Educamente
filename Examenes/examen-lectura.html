@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EducaMente - Biblioteca Virtual</title>
+    <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <!-- Lateral NavBar Start -->
+    <nav>
+        <ul>
+            <li>
+                <a href="#" class="logo">
+                    <img src="../IMG/Nav_Educa_logo.png" alt="">
+                    <span class="nav-item">Educamente</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="logout" id="logout-button">
+                    <i class="fa fa-sign-out"></i>
+                    <span class="nav-item">Salir del examen</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- Lateral NavBar Finish -->
+
+    <section class="description-section">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <h2>Examen de Lectura</h2>
+            </div>
+            <hr>
+            <div id="quiz">
+                <!-- Preguntas -->
+                <div class="question-container">
+                    <div class="question">1) En el siguiente fragmento de un texto sobre la historia del cine: "Algunos historiadores afirman que el cine mudo fue la cuna del lenguaje cinematográfico moderno. Sin embargo, es más acertado pensar que el cine sonoro no solo revolucionó la industria, sino que también sentó las bases del cine como lo conocemos hoy."<br><br>El autor introduce la frase "Sin embargo, es más acertado pensar que" con el fin de:</div>
+                    <ul class="answers">
+                        <li><input type="radio" name="q1" value="A">A. Reforzar la tesis principal del texto sobre el cine mudo.</li>
+                        <li><input type="radio" name="q1" value="B">B. Señalar una posición alternativa sobre el desarrollo del cine.</li>
+                        <li><input type="radio" name="q1" value="C">C. Legitimar la importancia histórica del cine mudo.</li>
+                        <li><input type="radio" name="q1" value="D">D. Convencer al lector de que el cine mudo es inferior al sonoro.</li>
+                    </ul>
+                </div>
+                <div class="question-container">
+                    <div class="question">2) Lea el siguiente resumen de un texto sobre el cambio climático:
+                        "El autor analiza el impacto del cambio climático en los países desarrollados, enfocándose en cómo afecta a las grandes ciudades de Europa y Norteamérica. Argumenta que estas naciones deben liderar los esfuerzos globales para combatir el calentamiento global."<br><br>Este resumen se puede describir como inadecuado porque:</div>
+                    <ul class="answers">
+                        <li><input type="radio" name="q2" value="A">A. Expone ideas contrarias a las afirmaciones principales del texto original.</li>
+                        <li><input type="radio" name="q2" value="B">B. Se centra en un grupo específico de países y no en el impacto global del cambio climático.</li>
+                        <li><input type="radio" name="q2" value="C">C. Omite el tono alarmista con que el autor se refiere al cambio climático.</li>
+                        <li><input type="radio" name="q2" value="D">D. Se detiene en presentar información en extremo detallada y secundaria del texto.</li>
+                    </ul>
+                </div>
+                <div class="question-container">
+                    <div class="question">3) En la frase "La biodiversidad es un patrimonio invaluable de la humanidad", ¿cuál de las siguientes palabras es un sinónimo de 'invaluable'?</div>
+                    <ul class="answers">
+                        <li><input type="radio" name="q3" value="A">A. Incalculable.</li>
+                        <li><input type="radio" name="q3" value="B">B. Inestimable.</li>
+                        <li><input type="radio" name="q3" value="C">C. Irremplazable.</li>
+                        <li><input type="radio" name="q3" value="D">D. Inagotable.</li>
+                    </ul>
+                </div>
+                <div class="question-container">
+                    <div class="question">4) ¿Cuál es el propósito principal del autor en el siguiente texto sobre redes sociales?
+                        "Las redes sociales han transformado la forma en que nos comunicamos, pero también han creado nuevos desafíos para la privacidad y la seguridad de la información personal. Aunque ofrecen oportunidades sin precedentes para conectarse, es crucial que los usuarios sean conscientes de los riesgos y aprendan a protegerse en línea."</div>
+                    <ul class="answers">
+                        <li><input type="radio" name="q4" value="A">A. Advertir sobre los peligros de las redes sociales.</li>
+                        <li><input type="radio" name="q4" value="B">B. Promover el uso de las redes sociales.</li>
+                        <li><input type="radio" name="q4" value="C">C. Explicar el funcionamiento de las redes sociales.</li>
+                        <li><input type="radio" name="q4" value="D">D. Comparar diferentes plataformas de redes sociales.</li>
+                    </ul>
+                </div>
+                <div class="question-container">
+                    <div class="question">5) En el contexto del siguiente fragmento sobre arte contemporáneo: "El arte conceptual desafía las nociones tradicionales de estética y técnica, priorizando la idea sobre la ejecución material de la obra."<br><br>¿Qué significa la palabra "desafía"?</div>
+                        
+                    <ul class="answers">
+                        <li><input type="radio" name="q5" value="A">A. Acepta.</li>
+                        <li><input type="radio" name="q5" value="B">B. Cuestiona.</li>
+                        <li><input type="radio" name="q5" value="C">C. Imita.</li>
+                        <li><input type="radio" name="q5" value="D">D. Refuerza.</li>
+                    </ul>
+                </div>
+                <!-- Botón de envío -->
+                <div class="quiz-footer">
+                    <button id="submit-btn" onclick="submitQuiz()" class="exam-btn">Enviar</button>
+                    <div id="result" class="score"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const logout_button = document.getElementById("logout-button");
+    
+            logout_button.addEventListener('click', function(event) {
+
+                const userConfirmed = confirm("¿Estás seguro de querer salir? se perderan todos los cambios.");
+                
+                if (userConfirmed) {
+
+                    window.location.href = '../bibliotecavirtual.html';
+                } else {
+
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+    
+    <script>
+        const correctAnswers = {
+            q1: 'B',
+            q2: 'B',
+            q3: 'B',
+            q4: 'A',
+            q5: 'B'
+        };
+
+        function submitQuiz() {
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+
+            for (let q in correctAnswers) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                const questionContainer = selected.closest('.question-container');
+
+                if (selected) {
+                    if (selected.value === correctAnswers[q]) {
+                        score++;
+                        questionContainer.classList.add('correct');
+                    } else {
+                        questionContainer.classList.add('incorrect');
+                        const correctAnswer = questionContainer.querySelector(`input[value="${correctAnswers[q]}"]`);
+                        correctAnswer.closest('li').style.fontWeight = 'bold';
+                    }
+                }
+            }
+
+            const percentage = (score / totalQuestions) * 100;
+            const resultText = `Puntaje: ${percentage}/100 - ` + (percentage >= 50 ? '¡Aprobado!' : 'Desaprobado');
+            const resultTextColor = (percentage >= 50 ? document.getElementById('result').style.color = "green" : document.getElementById('result').style.color = "red");
+            document.getElementById('result').textContent = resultText;
+
+            const submitBtn = document.getElementById('submit-btn');
+            if (percentage >= 50) {
+                submitBtn.textContent = 'Salir';
+                submitBtn.onclick = () => {
+                    // Obtener el puntaje actual guardado en localStorage
+                    const savedPuntaje = localStorage.getItem('lecturaPuntaje');
+                    const savedPercentage = savedPuntaje ? parseFloat(savedPuntaje.split('/')[0]) : 0;
+
+                    // Solo actualiza si el nuevo puntaje es mayor que el guardado
+                    if (percentage > savedPercentage) {
+                        localStorage.setItem('lecturaEstado', 'Completado');
+                        localStorage.setItem('lecturaPuntaje', `${percentage}/100`);
+                    }
+                    
+                    window.location.href = '../bibliotecavirtual.html'; // Redirigir a la página de la biblioteca virtual
+                };
+            } else {
+                submitBtn.textContent = 'Repetir';
+                submitBtn.onclick = () => {
+                    location.reload();
+                };
+            }
+        }
+    </script>
+</body>
+</html>

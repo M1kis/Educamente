@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EducaMente - Preguntas y respuestas</title>
+    <link rel="stylesheet" href="./CSS/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <!-- Language switcher Start -->
+    <button class="whatsapp-button" id="toggle-lang">
+        <i class="fa-solid fa-globe" style="font-size:35px;color:rgb(255, 255, 255)"></i>
+    </button>
+    <!-- Language switcher Finish -->
+
+    <!-- Lateral NavBar Start -->
+    <nav>
+        <ul>
+            <li>
+                <a href="#" class="logo">
+                    <img src="./IMG/Nav_Educa_logo.png" alt="">
+                    <span class="nav-item" data-translate="brand-name">Educamente</span>
+                </a>
+            </li>
+            <li>
+                <a href="index.html">
+                <i class="fa fa-home" style="font-size: 18px"></i>
+                <span class="nav-item" data-translate="home">Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a href="./bibliotecavirtual.html">
+                    <i class="fa fa-book" style="font-size: 18px"></i>
+                    <span class="nav-item" data-translate="library">Biblioteca virtual</span>
+                </a>
+            </li>
+            <li>
+                <a href="./diario.html">
+                    <i class="fa fa-newspaper-o" style="font-size: 18px"></i>
+                    <span class="nav-item" data-translate="diary">Mi diario</span>
+                </a>
+            </li>
+            <li>
+                <a href="./contacto.html">
+                    <i class="fa fa-group" style="font-size: 18px"></i>
+                    <span class="nav-item" data-translate="contact">Contacto</span>
+                </a>
+            </li>
+            <li>
+                <a href="./Preguntas.html">
+                    <i class="fa fa-support" style="font-size: 18px"></i>
+                    <span class="nav-item" data-translate="faq">FAQ</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="logout" id="logout-button">
+                    <i class="fa fa-sign-out"></i>
+                    <span class="nav-item" data-translate="logout">Cerrar sesión</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- Lateral NavBar Finish -->
+
+    <div class="main-div">
+        <h2 data-translate="title">Mi diario</h1>
+        <h3 data-translate="sub-title">Este espacio es para ti, escribe lo que piensas.</h3>
+        <div class="container-diario">
+            <div class="list-header">
+                <div id="addNoteDiv" onclick="popup()">
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+            </div>
+            <div id="list-container">
+                <ul id="notes-list"></ul>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <h4 data-translate="footer-brand">Eduwise</h4>
+                <p data-translate="footer-desc">Tu plataforma educativa de confianza.</p>
+            </div>
+            <div class="footer-center">
+                <h4 data-translate="quick-links">Enlaces rápidos</h4>
+                <ul>
+                    <li><a href="./index.html" data-translate="home">Inicio</a></li>
+                    <li><a href="./bibliotecavirtual.html" data-translate="library">Biblioteca virtual</a></li>
+                    <li><a href="./diario.html" data-translate="diary">Mi diario</a></li>
+                    <li><a href="./contacto.html" data-translate="contact">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-right">
+                <h4 data-translate="follow-us">Síguenos</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 <span data-translate="footer-brand">Eduwise</span>. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const logout_button = document.getElementById("logout-button");
+
+            logout_button.addEventListener('click', function(event) {
+
+                const userConfirmed = confirm("¿Estás seguro de querer cerrar la sesión?");
+                
+                if (userConfirmed) {
+
+                    window.location.href = './login.html';
+                } else {
+
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+
+    <script>
+        
+        function popup() {
+
+        const popupContainer = document.createElement("div");
+
+        popupContainer.innerHTML = `
+        <div id="popupContainer">
+            <h1>New note</h1>
+            <textarea id="note-text" placeholder="What are you thinking?..."></textarea>
+            <div id="btn-container">
+                <button id="submitBtn" onclick="createNote()">New Note</button>
+                <button id="closeBtn" onclick="closePopup()">Close</button>
+            </div>
+        </div>
+        `;
+        document.body.appendChild(popupContainer);
+        }
+
+        function closePopup() {
+        const popupContainer = document.getElementById("popupContainer");
+        if(popupContainer) {
+            popupContainer.remove();
+        }
+        }
+
+        function createNote() {
+
+        const popupContainer = document.getElementById('popupContainer');
+        const noteText = document.getElementById('note-text').value;
+        if (noteText.trim() !== '') {
+            const note = {
+            id: new Date().getTime(),
+            text: noteText
+            };
+
+            const existingNotes = JSON.parse(localStorage.getItem('notes')) || [];
+            existingNotes.push(note);
+
+            localStorage.setItem('notes', JSON.stringify(existingNotes));
+
+            document.getElementById('note-text').value = '';
+
+            popupContainer.remove();
+            displayNotes();
+        }
+        }
+
+
+        /*************************************************************************
+        * Display Notes Logic
+        **************************************************************************/
+
+        function displayNotes() {
+        const notesList = document.getElementById('notes-list');
+        notesList.innerHTML = '';
+
+        const notes = JSON.parse(localStorage.getItem('notes')) || [];
+
+        notes.forEach(note => {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+            <span>${note.text}</span>
+            <div id="noteBtns-container">
+                <button id="editBtn" onclick="editNote(${note.id})"><i class="fa-solid fa-pen"></i></button>
+                <button id="deleteBtn" onclick="deleteNote(${note.id})"><i class="fa-solid fa-trash"></i></button>
+            </div>
+            `;
+            notesList.appendChild(listItem);
+        });
+        }
+
+
+        /*************************************************************************
+        * Edit Note Popup Logic
+        **************************************************************************/
+
+        function editNote(noteId) {
+        const notes = JSON.parse(localStorage.getItem('notes')) || [];
+        const noteToEdit = notes.find(note => note.id == noteId);
+        const noteText = noteToEdit ? noteToEdit.text : '';
+        const editingPopup = document.createElement("div");
+
+        editingPopup.innerHTML = `
+        <div id="editing-container" data-note-id="${noteId}">
+            <h1>Edit Note</h1>
+            <textarea id="note-text">${noteText}</textarea>
+            <div id="btn-container">
+                <button id="submitBtn" onclick="updateNote()">Done</button>
+                <button id="closeBtn" onclick="closeEditPopup()">Cancel</button>
+            </div>
+        </div>
+        `;
+
+        document.body.appendChild(editingPopup);
+        }
+
+        function closeEditPopup() {
+        const editingPopup = document.getElementById("editing-container");
+
+        if(editingPopup) {
+            editingPopup.remove();
+        }
+        }
+
+        function updateNote() {
+        const noteText = document.getElementById('note-text').value.trim();
+        const editingPopup = document.getElementById('editing-container');
+
+        if (noteText !== '') {
+            const noteId = editingPopup.getAttribute('data-note-id');
+            let notes = JSON.parse(localStorage.getItem('notes')) || [];
+
+            // Find the note to update
+            const updatedNotes = notes.map(note => {
+                if (note.id == noteId) {
+                    return { id: note.id, text: noteText };
+                }
+                return note;
+            });
+
+            // Update the notes in local storage
+            localStorage.setItem('notes', JSON.stringify(updatedNotes));
+
+            // Close the editing popup
+            editingPopup.remove();
+
+            // Refresh the displayed notes
+            displayNotes();
+        }
+        }
+
+        /*************************************************************************
+        * Delete Note Logic
+        **************************************************************************/
+
+        function deleteNote(noteId) {
+        let notes = JSON.parse(localStorage.getItem('notes')) || [];
+        notes = notes.filter(note => note.id !== noteId);
+
+        localStorage.setItem('notes', JSON.stringify(notes));
+        displayNotes();
+        }
+
+        displayNotes();
+    </script>
+
+    <script>
+        const translations = {
+            en: {
+                "brand-name": "Eduwise",
+                "home": "Home",
+                "library": "Virtual Library",
+                "diary": "My Diary",
+                "contact": "Contact",
+                "faq": "FAQ",
+                "logout": "Log out",
+                "title": "My Diary",
+                "sub-title": "This space is for you, write what you think.",
+                "footer-brand": "Eduwise",
+                "footer-desc": "Your trusted educational platform.",
+                "quick-links": "Quick Links",
+                "follow-us": "Follow us"
+            },
+            es: {
+                "brand-name": "Educamente",
+                "home": "Inicio",
+                "library": "Biblioteca virtual",
+                "diary": "Mi diario",
+                "contact": "Contacto",
+                "faq": "FAQ",
+                "logout": "Cerrar sesión",
+                "title": "Mi diario",
+                "sub-title": "Este espacio es para ti, escribe lo que piensas.",
+                "footer-brand": "Educamente",
+                "footer-desc": "Tu plataforma educativa de confianza.",
+                "quick-links": "Enlaces rápidos",
+                "follow-us": "Síguenos"
+            }
+        };
+
+
+        // Function to change the language
+        function changeLanguage(language) {
+            document.querySelectorAll('[data-translate]').forEach((element) => {
+                const key = element.getAttribute('data-translate');
+                if (translations[language][key]) {
+                    element.textContent = translations[language][key];
+                }
+            });
+        }
+
+        // Cargar el idioma desde localStorage o por defecto español
+        let currentLang = localStorage.getItem('language') || 'es';
+
+        // Set default language on page load
+        window.onload = () => {
+            changeLanguage(currentLang);  // Aplicar el idioma guardado al cargar la página
+        };
+
+        // Código para cambiar el idioma con un botón (si está presente en esa página)
+        const toggleLangButton = document.getElementById('toggle-lang');
+        if (toggleLangButton) {
+            toggleLangButton.addEventListener('click', () => {
+                currentLang = currentLang === 'es' ? 'en' : 'es';
+                changeLanguage(currentLang);
+                localStorage.setItem('language', currentLang);  // Guardar el idioma seleccionado
+            });
+        }    
+    </script>
+</body>
+</html>

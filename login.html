@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EducaMente - Inicio de sesión</title>
+    <link rel="stylesheet" href="./CSS/styles2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <!-- Language switcher Start -->
+    <button class="whatsapp-button" id="toggle-lang">
+        <i class="fa-solid fa-globe" style="font-size:35px;color:rgb(255, 255, 255)"></i>
+    </button>
+    <!-- Language switcher Finish -->
+
+    <div class="container-login">
+        <img src="./IMG/Logo_Educa_Mente.png" alt="">
+        <div class="subcontainer-login">
+            <form id="login-form">
+                <h1 data-translate="login-title">Iniciar sesión</h1>
+                <div class="input-box">
+                    <input type="text" placeholder="Correo electrónico" id="login-mail" data-placeholder="email-placeholder">
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="Contraseña" id="login-password" data-placeholder="password-placeholder">
+                </div>
+                <div class="registrarse-link">
+                    <p data-translate="no-account-text">¿Aún no tienes cuenta?</p>
+                    <a href="./registro.html" data-translate="register-link">Regístrate</a>
+                </div>
+                <button type="submit" class="login-btn" id="login-button" data-translate="login-btn">Ingresar</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginMailInput = document.getElementById("login-mail");
+            const loginPasswordInput = document.getElementById("login-password");
+            const loginButton = document.getElementById("login-button");
+    
+            const users = JSON.parse(localStorage.getItem('users')) || {};
+    
+            if (loginButton) {
+                loginButton.addEventListener('click', function(event) {
+                    event.preventDefault();
+    
+                    // Obtener los valores de los campos de entrada
+                    const inputUsername = loginMailInput.value.trim();
+                    const inputPassword = loginPasswordInput.value.trim();
+    
+                    // Verificar si el usuario existe en localStorage
+                    if (users[inputUsername]) {
+                        const storedUsername = users[inputUsername].username;
+                        const storedPassword = users[inputUsername].password;
+    
+                        // Comparar las contraseñas
+                        if (storedPassword === inputPassword) {
+                            alert("Inicio de sesión exitoso. ¡Bienvenido!");
+                            // Aquí puedes redirigir al usuario a otra página, como la página de inicio de la cuenta.
+                            window.location.href = './index.html';
+                        } else {
+                            alert("Contraseña incorrecta. Por favor, inténtalo de nuevo.");
+                        }
+                    } else {
+                        alert("Usuario no encontrado. Por favor, regístrate.");
+                    }
+                });
+            } else {
+                console.error("No se pudo encontrar el botón de inicio de sesión.");
+            }
+        });
+    </script>
+
+    <script>
+        const translations = {
+            en: {
+                "login-title": "Log In",
+                "no-account-text": "Don't have an account yet?",
+                "register-link": "Sign Up",
+                "login-btn": "Log In",
+                "email-placeholder": "Email address",
+                "password-placeholder": "Password",
+            },
+            es: {
+                "login-title": "Iniciar sesión",
+                "no-account-text": "¿Aún no tienes cuenta?",
+                "register-link": "Regístrate",
+                "login-btn": "Ingresar",
+                "email-placeholder": "Correo electronico",
+                "password-placeholder": "Contraseña",
+            }
+        };
+
+        // Function to change the language
+        function changeLanguage(language) {
+                // Cambiar textos de los elementos con data-translate
+                document.querySelectorAll('[data-translate]').forEach((element) => {
+                    const key = element.getAttribute('data-translate');
+                    if (translations[language][key]) {
+                        element.textContent = translations[language][key];
+                    }
+                });
+
+                // Cambiar los placeholders de los inputs/textarea con data-placeholder
+                document.querySelectorAll('[data-placeholder]').forEach((input) => {
+                    const key = input.getAttribute('data-placeholder');
+                    if (translations[language][key]) {
+                        input.placeholder = translations[language][key];
+                    }
+                });
+            }
+
+            // Cargar el idioma desde localStorage o por defecto español
+            let currentLang = localStorage.getItem('language') || 'es';
+
+            // Set default language on page load
+            window.onload = () => {
+                changeLanguage(currentLang);  // Aplicar el idioma guardado al cargar la página
+            };
+
+            // Código para cambiar el idioma con un botón (si está presente en esa página)
+            const toggleLangButton = document.getElementById('toggle-lang');
+            if (toggleLangButton) {
+                toggleLangButton.addEventListener('click', () => {
+                    currentLang = currentLang === 'es' ? 'en' : 'es';
+                    changeLanguage(currentLang);
+                    localStorage.setItem('language', currentLang);  // Guardar el idioma seleccionado
+                });
+            }        
+    </script>
+</body>
+</html>

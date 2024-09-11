@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EducaMente - Biblioteca Virtual</title>
+    <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <!-- Lateral NavBar Start -->
+    <nav>
+        <ul>
+            <li>
+                <a href="#" class="logo">
+                    <img src="../IMG/Nav_Educa_logo.png" alt="">
+                    <span class="nav-item">Educamente</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="logout" id="logout-button">
+                    <i class="fa fa-sign-out"></i>
+                    <span class="nav-item">Salir del examen</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- Lateral NavBar Finish -->
+
+    <section class="description-section">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <h2>Examen de Ingles</h2>
+            </div>
+            <hr>
+            <div id="quiz">
+                <!-- Preguntas -->
+                <div class="question-container">
+                    <div class="question">1) Complete the Sentence (Verb Tenses): By the time she arrives, I (finish) ____ the report.</div>
+                    <ul class="answers">
+                        <li><input type="radio" name="q1" value="A">A. finish</li>
+                        <li><input type="radio" name="q1" value="B">B. finishes</li>
+                        <li><input type="radio" name="q1" value="C">C. will finish</li>
+                        <li><input type="radio" name="q1" value="D">D. will have finished</li>
+                    </ul>
+                </div>
+                <div class="question-container">
+                    <div class="question">2) Choose the Correct Form (Adjectives and Adverbs): The book was (exceptional/exceptionally) ____ well-received by the critics.</div>
+                    <ul class="answers">
+                        <li><input type="radio" name="q2" value="A">A. exceptional</li>
+                        <li><input type="radio" name="q2" value="B">B. exceptionally</li>
+                        <li><input type="radio" name="q2" value="C">C. more exceptional</li>
+                        <li><input type="radio" name="q2" value="D">D. exception</li>
+                    </ul>
+                </div>
+                <div class="question-container">
+                    <div class="question">3) Select the sentence with the grammatical error:</div>
+                    <ul class="answers">
+                        <li><input type="radio" name="q3" value="A">A. She had never saw such a beautiful sunset.</li>
+                        <li><input type="radio" name="q3" value="B">B. They have been working here for five years.</li>
+                        <li><input type="radio" name="q3" value="C">C. If I were you, I would take the opportunity.</li>
+                        <li><input type="radio" name="q3" value="D">D. The team were excited about the upcoming match.</li>
+                    </ul>
+                </div>
+                <div class="question-container">
+                    <div class="question">4) Choose the synonym of the given word: The word "vivid" is closest in meaning to:</div>
+                    <ul class="answers">
+                        <li><input type="radio" name="q4" value="A">A. Dull</li>
+                        <li><input type="radio" name="q4" value="B">B. Bright</li>
+                        <li><input type="radio" name="q4" value="C">C. Faint</li>
+                        <li><input type="radio" name="q4" value="D">D. Invisible</li>
+                    </ul>
+                </div>
+                <div class="question-container">
+                    <div class="question">5) Fill in the blank with the most appropriate word: The company’s innovative approach to solving problems was a key ____ to its success.</div>
+                    <ul class="answers">
+                        <li><input type="radio" name="q5" value="A">A. hindrance</li>
+                        <li><input type="radio" name="q5" value="B">B. advantage</li>
+                        <li><input type="radio" name="q5" value="C">C. mistake</li>
+                        <li><input type="radio" name="q5" value="D">D. failure</li>
+                    </ul>
+                </div>
+                <!-- Botón de envío -->
+                <div class="quiz-footer">
+                    <button id="submit-btn" onclick="submitQuiz()" class="exam-btn">Enviar</button>
+                    <div id="result" class="score"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const logout_button = document.getElementById("logout-button");
+    
+            logout_button.addEventListener('click', function(event) {
+
+                const userConfirmed = confirm("¿Estás seguro de querer salir? se perderan todos los cambios.");
+                
+                if (userConfirmed) {
+
+                    window.location.href = '../bibliotecavirtual.html';
+                } else {
+
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+    
+    <script>
+        const correctAnswers = {
+            q1: 'D',
+            q2: 'B',
+            q3: 'A',
+            q4: 'B',
+            q5: 'B'
+        };
+
+        function submitQuiz() {
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+
+            for (let q in correctAnswers) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                const questionContainer = selected.closest('.question-container');
+
+                if (selected) {
+                    if (selected.value === correctAnswers[q]) {
+                        score++;
+                        questionContainer.classList.add('correct');
+                    } else {
+                        questionContainer.classList.add('incorrect');
+                        const correctAnswer = questionContainer.querySelector(`input[value="${correctAnswers[q]}"]`);
+                        correctAnswer.closest('li').style.fontWeight = 'bold';
+                    }
+                }
+            }
+
+            const percentage = (score / totalQuestions) * 100;
+            const resultText = `Puntaje: ${percentage}/100 - ` + (percentage >= 50 ? '¡Aprobado!' : 'Desaprobado');
+            const resultTextColor = (percentage >= 50 ? document.getElementById('result').style.color = "green" : document.getElementById('result').style.color = "red");
+            document.getElementById('result').textContent = resultText;
+
+            const submitBtn = document.getElementById('submit-btn');
+            if (percentage >= 50) {
+                submitBtn.textContent = 'Salir';
+                submitBtn.onclick = () => {
+                    // Obtener el puntaje actual guardado en localStorage
+                    const savedPuntaje = localStorage.getItem('inglesPuntaje-3');
+                    const savedPercentage = savedPuntaje ? parseFloat(savedPuntaje.split('/')[0]) : 0;
+
+                    // Solo actualiza si el nuevo puntaje es mayor que el guardado
+                    if (percentage > savedPercentage) {
+                        localStorage.setItem('inglesEstado-3', 'Completado');
+                        localStorage.setItem('inglesPuntaje-3', `${percentage}/100`);
+                    }
+                    
+                    window.location.href = '../bibliotecavirtual.html'; // Redirigir a la página de la biblioteca virtual
+                };
+            } else {
+                submitBtn.textContent = 'Repetir';
+                submitBtn.onclick = () => {
+                    location.reload();
+                };
+            }
+        }
+    </script>
+</body>
+</html>

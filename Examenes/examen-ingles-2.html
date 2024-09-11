@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EducaMente - Biblioteca Virtual</title>
+    <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <!-- Lateral NavBar Start -->
+    <nav>
+        <ul>
+            <li>
+                <a href="#" class="logo">
+                    <img src="../IMG/Nav_Educa_logo.png" alt="">
+                    <span class="nav-item">Educamente</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="logout" id="logout-button">
+                    <i class="fa fa-sign-out"></i>
+                    <span class="nav-item">Salir del examen</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- Lateral NavBar Finish -->
+
+    <section class="description-section">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <h2>Examen de Ingles</h2>
+            </div>
+            <hr>
+            <div id="quiz">
+                <!-- Preguntas -->
+                <div class="question-container">
+                    <div class="question">1) Complete the Sentence (Verb Tenses): She usually (go) ____ to school by bus.</div>
+                    <ul class="answers">
+                        <li><input type="radio" name="q1" value="A">A. go</li>
+                        <li><input type="radio" name="q1" value="B">B. goes</li>
+                        <li><input type="radio" name="q1" value="C">C. going</li>
+                        <li><input type="radio" name="q1" value="D">D. gone</li>
+                    </ul>
+                </div>
+                <div class="question-container">
+                    <div class="question">2) Choose the Correct Form (Adjectives and Adverbs): She sings (beautiful/beautifully) ____.</div>
+                    <ul class="answers">
+                        <li><input type="radio" name="q2" value="A">A. beautiful</li>
+                        <li><input type="radio" name="q2" value="B">B. beautifully</li>
+                        <li><input type="radio" name="q2" value="C">C. more beautiful</li>
+                        <li><input type="radio" name="q2" value="D">D. beautified</li>
+                    </ul>
+                </div>
+                <div class="question-container">
+                    <div class="question">3) Choose the correct sentence</div>
+                    <ul class="answers">
+                        <li><input type="radio" name="q3" value="A">A. She dont like chocolate.</li>
+                        <li><input type="radio" name="q3" value="B">B. She doesnt likes chocolate.</li>
+                        <li><input type="radio" name="q3" value="C">C. She doesnt like chocolate.</li>
+                        <li><input type="radio" name="q3" value="D">D. She dont likes chocolate.</li>
+                    </ul>
+                </div>
+                <div class="question-container">
+                    <div class="question">4) Match the word with the correct definition: Curious means?</div>
+                    <ul class="answers">
+                        <li><input type="radio" name="q4" value="A">A. Eager and excited about something</li>
+                        <li><input type="radio" name="q4" value="B">B. Able to be trusted</li>
+                        <li><input type="radio" name="q4" value="C">C. Wanting to know more about something</li>
+                        <li><input type="radio" name="q4" value="D">D. Always willing to help others</li>
+                    </ul>
+                </div>
+                <div class="question-container">
+                    <div class="question">5) Complete the sentence with the correct word: Winning the competition was a great ____ for her.</div>
+                    <ul class="answers">
+                        <li><input type="radio" name="q5" value="A">A. challenge</li>
+                        <li><input type="radio" name="q5" value="B">B. disaster</li>
+                        <li><input type="radio" name="q5" value="C">C. opportunity</li>
+                        <li><input type="radio" name="q5" value="D">D. achievement</li>
+                    </ul>
+                </div>
+                <!-- Botón de envío -->
+                <div class="quiz-footer">
+                    <button id="submit-btn" onclick="submitQuiz()" class="exam-btn">Enviar</button>
+                    <div id="result" class="score"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const logout_button = document.getElementById("logout-button");
+    
+            logout_button.addEventListener('click', function(event) {
+
+                const userConfirmed = confirm("¿Estás seguro de querer salir? se perderan todos los cambios.");
+                
+                if (userConfirmed) {
+
+                    window.location.href = '../bibliotecavirtual.html';
+                } else {
+
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+    
+    <script>
+        const correctAnswers = {
+            q1: 'B',
+            q2: 'B',
+            q3: 'C',
+            q4: 'C',
+            q5: 'C'
+        };
+
+        function submitQuiz() {
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+
+            for (let q in correctAnswers) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                const questionContainer = selected.closest('.question-container');
+
+                if (selected) {
+                    if (selected.value === correctAnswers[q]) {
+                        score++;
+                        questionContainer.classList.add('correct');
+                    } else {
+                        questionContainer.classList.add('incorrect');
+                        const correctAnswer = questionContainer.querySelector(`input[value="${correctAnswers[q]}"]`);
+                        correctAnswer.closest('li').style.fontWeight = 'bold';
+                    }
+                }
+            }
+
+            const percentage = (score / totalQuestions) * 100;
+            const resultText = `Puntaje: ${percentage}/100 - ` + (percentage >= 50 ? '¡Aprobado!' : 'Desaprobado');
+            const resultTextColor = (percentage >= 50 ? document.getElementById('result').style.color = "green" : document.getElementById('result').style.color = "red");
+            document.getElementById('result').textContent = resultText;
+
+            const submitBtn = document.getElementById('submit-btn');
+            if (percentage >= 50) {
+                submitBtn.textContent = 'Salir';
+                submitBtn.onclick = () => {
+                    // Obtener el puntaje actual guardado en localStorage
+                    const savedPuntaje = localStorage.getItem('inglesPuntaje-2');
+                    const savedPercentage = savedPuntaje ? parseFloat(savedPuntaje.split('/')[0]) : 0;
+
+                    // Solo actualiza si el nuevo puntaje es mayor que el guardado
+                    if (percentage > savedPercentage) {
+                        localStorage.setItem('inglesEstado-2', 'Completado');
+                        localStorage.setItem('inglesPuntaje-2', `${percentage}/100`);
+                    }
+                    
+                    window.location.href = '../bibliotecavirtual.html'; // Redirigir a la página de la biblioteca virtual
+                };
+            } else {
+                submitBtn.textContent = 'Repetir';
+                submitBtn.onclick = () => {
+                    location.reload();
+                };
+            }
+        }
+    </script>
+</body>
+</html>
